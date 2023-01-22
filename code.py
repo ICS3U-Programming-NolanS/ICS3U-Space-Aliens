@@ -24,23 +24,24 @@ def game_scene():
     select_button = constants.button_state["button_up"]
 
     # Get sound ready
-    pew_sound = open("pew.wav", 'rb')
+    pew_sound = open("pew.wav", "rb")
     sound = ugame.audio
     sound.stop()
     sound.mute(False)
 
     # Set the background image to 0 in the image bank
     # and size (10x8 tiles of size 16x16)
-    background = stage.Grid(
-        image_bank_background, 10, 8
-    )
+    background = stage.Grid(image_bank_background, 10, 8)
     # a sprite that will be updated every frame
     ship = stage.Sprite(
         image_bank_sprites, 5, 75, constants.SCREEN_Y - (2 * constants.SPRITE_SIZE)
     )
-    alien = stage.Sprite(image_bank_sprites, 9,
-                    int(constants.SCREEN_X / 2 - constants.SPRITE_SIZE / 2),
-                    16)
+    alien = stage.Sprite(
+        image_bank_sprites,
+        9,
+        int(constants.SCREEN_X / 2 - constants.SPRITE_SIZE / 2),
+        16,
+    )
     # Create a stage for the background to show up on
     # and set the frame rate to 60fps
     game = stage.Stage(ugame.display, constants.FPS)
@@ -59,15 +60,15 @@ def game_scene():
 
         # A button to fire
         if keys & ugame.K_X != 0:
-            if a_button == constants.button_state["button_up"]:
-                a_button = constants.button_state["button_just_pressed"]
-            elif a_button == constants.button_state["button_just_pressed"]:
-                a_button = constants.button_state["button_still_pressed"]
+            if b_button == constants.button_state["button_up"]:
+                b_button = constants.button_state["button_just_pressed"]
+            elif b_button == constants.button_state["button_just_pressed"]:
+                b_button = constants.button_state["button_still_pressed"]
         else:
-            if a_button == constants.button_state["button_still_pressed"]:
-                a_button == constants.button_state["button_released"]
+            if b_button == constants.button_state["button_still_pressed"]:
+                b_button = constants.button_state["button_released"]
             else:
-                a_button == constants.button_state["button_up"]
+                b_button = constants.button_state["button_up"]
         # B button
         if keys & ugame.K_O:
             pass
@@ -91,7 +92,7 @@ def game_scene():
             pass
 
         # Update game logic
-        if a_button == constants.button_state["button_just_pressed"]:
+        if b_button == constants.button_state["button_just_pressed"]:
             sound.play(pew_sound)
 
         # Redraw sprites
