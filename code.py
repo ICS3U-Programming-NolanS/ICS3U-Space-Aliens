@@ -182,6 +182,7 @@ def menu_scene():
                 16,
             )
 
+            # Create a list of lasers for when we shoot to pacman
             lasers = []
             for laser_number in range(constants.TOTAL_NUMBER_OF_LASERS):
                 a_single_laser = stage.Sprite(
